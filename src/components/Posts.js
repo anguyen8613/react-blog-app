@@ -23,23 +23,7 @@ class Posts extends Component{
 		})
 	}
 
-	handleClick = (props)=>{
-		console.log(props.original.id);
-		return(
-		<div>
-			<Link
-				to = {{
-					pathname:'posts/' + props.original.id,
 
-				}}
-
-			>
-
-
-			</Link>
-		</div>
-		)
-	}
 
 	render(){
 		const columns = [
@@ -79,20 +63,15 @@ class Posts extends Component{
 					return(
 						<div>
 							<Link
-							to = {{
+								to = {{
 									pathname:'/posts/' + props.original.id,
 
-							}}
+								}}
 
-							>
-
-
-						details</Link>
+							>details</Link>
 						</div>
-					)
-					
-					
-				}	
+					)	
+			}	
 		
 				,
 				sortable: false,

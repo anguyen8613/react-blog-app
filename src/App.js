@@ -20,8 +20,8 @@ class App extends Component {
           <Route exact path='/' component={Home} />
           <Route path='/about' component={About} />
           <Route path='/contact' component={Contact} />
-          <Route path='/posts' component={Posts} />
-          <Route path='/post/:id' component={Post} />
+          <Route exact path='/posts' component={Posts} />
+          <Route path='/posts/:id' component={Post} />
           <Route exact path='/users/' component={Users} />
           <Route path='/users/:id' component={User} />
           </Switch>

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 
 class Post extends Component {
@@ -8,13 +9,16 @@ class Post extends Component {
 	}
 
 	componentDidMount(){
-		console.log(this.props.location.state.post);
-
-
-
-		this.setState({
-			post: this.props.location.state.post
+		
+		const id = this.props.match.params.id;
+		console.log(id);
+		axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
+		.then((res) => {
+			this.setState({
+				post: res.data
+			})
 		})
+
 	}
 
 	render(){
@@ -33,6 +37,7 @@ class Post extends Component {
 			):(<p>loading post...</p>)
 		return(
 			<div>
+
 				{post}
 			</div>
 		)

@@ -25,8 +25,8 @@ class Users extends Component{
 		const users = this.state.users? (
 				this.state.users.map((user) => {
 					return (
-					<div className='row'>
-						<div clasName='col s12 m6'>
+					<div className='row' key={user.id}>
+						<div className='col s12 m6'>
 							<div className='card blue-grey darken-1'>
 								<div key={user.id}>
 									<div>
