@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import ReactTable from 'react-table-6';
+import "react-table-6/react-table.css";
+
 
 
 class Posts extends Component{
@@ -20,34 +23,103 @@ class Posts extends Component{
 		})
 	}
 
-	render(){
-		const posts = this.state.posts?
-			(
-				this.state.posts.map((post)=>{
-					return(
-						<div className="row" key={post.id}>
-    						<div className="col s12 m20">
-      							<div className="card blue-grey darken-1">
-       								 <div className="card-content white-text">
-          								<span className="card-title">{post.title}</span>
-          								<p>{post.body}</p>
-          								<Link to = {
-          									{
-          										pathname: 'post/' + post.id,
-          										state: {
-          											post: post
-          										}
+	handleClick = (props)=>{
+		console.log(props.original.id);
+		return(
+		<div>
+			<Link
+				to = {{
+					pathname:'posts/' + props.original.id,
 
-          									}
-          								}>
-          								details
-          								</Link>
-       								 </div>
-      							</div>
-    						</div>
-  						</div>
+				}}
+
+			>
+
+
+			</Link>
+		</div>
+		)
+	}
+
+	render(){
+		const columns = [
+			{
+				Header: 'ID',
+				accessor: 'id',
+				style: {
+					textAlign: 'right'
+				},
+				width: 100,
+				maxWidth:100,
+				minWidth:100
+
+			},
+			{
+				Header: 'User ID',
+				accessor: 'userId',
+				style: {
+					textAlign: 'right'
+				},
+				width: 100,
+				maxWidth:100,
+				minWidth:100
+			},
+			{
+				Header: 'Title',
+				accessor: 'title'
+			},
+			{
+				Header: 'Body',
+				accessor: 'body',
+				filterable: false
+			},	
+			{
+				Header: 'Actions',
+				Cell: props => {
+					return(
+						<div>
+							<Link
+							to = {{
+									pathname:'/posts/' + props.original.id,
+
+							}}
+
+							>
+
+
+						details</Link>
+						</div>
 					)
-				})
+					
+					
+				}	
+		
+				,
+				sortable: false,
+				filterable: false,
+				width: 100,
+				maxWidth:100,
+				minWidth:100
+
+			}
+
+				
+		]
+		const posts = this.state.posts?
+			 (
+
+						<div>
+    						<ReactTable 
+    						columns={columns} 
+    						data={this.state.posts} 
+    						filterable
+    						defaultPageSize={10}
+    						showPagination={true}>
+
+							</ReactTable>
+  						</div>
+					
+			
 			):(
 				<div>
 					No Posts to show
