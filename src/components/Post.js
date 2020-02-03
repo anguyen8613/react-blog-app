@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+
 class Post extends Component {
 
 	state = {
@@ -8,6 +9,8 @@ class Post extends Component {
 
 	componentDidMount(){
 		console.log(this.props.location.state.post);
+
+
 
 		this.setState({
 			post: this.props.location.state.post
