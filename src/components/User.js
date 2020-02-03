@@ -26,7 +26,7 @@ class User extends Component {
 		const user = this.state.user?(
 			<div>
 				<div className='row'>
-					<div clasName='col s12 m6'>
+					<div className='col s12 m6'>
 						<div className='card blue darken-4'>
 							<p>{this.state.user.name}</p>
 							<p>{JSON.stringify(this.state.user.address)}</p>
