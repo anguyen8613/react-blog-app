@@ -16,9 +16,6 @@ class User extends Component {
 				user: res.data
 			});
 		})
-
-
-
 	}
 
 	render() {
