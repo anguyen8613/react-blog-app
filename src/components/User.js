@@ -1,36 +1,27 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import {connect} from 'react-redux';
+import {deleteUser} from '../actions/userActions';
+
 
 class User extends Component {
 
 
-	state = {
-		user : null
-	}
-
-	componentDidMount() {
-		const id = this.props.match.params.id;
-		axios.get('https://jsonplaceholder.typicode.com/users/' + id)
-		.then((res) => {
-			this.setState({
-				user: res.data
-			});
-		})
-
-
-
+	handleClick = () =>{
+		this.props.deleteUser(this.props.user.id);
+		this.props.history.push('/users');
 	}
 
 	render() {
-
-		const user = this.state.user?(
+		console.log(this.props);
+		const user = this.props.user?(
 			<div>
 				<div className='row'>
 					<div className='col s12 m6'>
-						<div className='card blue darken-4'>
-							<p>{this.state.user.name}</p>
-							<p>{JSON.stringify(this.state.user.address)}</p>
-							<p>{JSON.stringify(this.state.user.company)}</p>
+						<div className='card pink darken-2'>
+							<p>{this.props.user.name}</p>
+							<p>{JSON.stringify(this.props.user.address)}</p>
+							<p>{JSON.stringify(this.props.user.company)}</p>
+							<button onClick={this.handleClick}>delete</button>
 						</div>
 					</div>
 				</div>
@@ -51,4 +42,17 @@ class User extends Component {
 	}
 }
 
-export default User;
+const mapStateToProps = (state, ownProps) => {
+	let id = ownProps.match.params.id;
+	return {
+		user: state.users.find(user => user.id === parseInt(id))
+	}
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		deleteUser: (id) => {dispatch(deleteUser(id))}
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(User);
