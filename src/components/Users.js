@@ -1,33 +1,19 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 
 class Users extends Component{
 
-	state = {
-		users : null
-	}
-
-	componentDidMount(){
-
-		axios.get('https://jsonplaceholder.typicode.com/users')
-		.then((res) => {
-			this.setState({
-				users:res.data
-			})
-		})
-
 	
-
-	}
 	render(){
 
-		const users = this.state.users? (
-				this.state.users.map((user) => {
+		const users = this.props.users? (
+				this.props.users.map((user) => {
 					return (
 					<div className='row' key={user.id}>
 						<div className='col s12 m6'>
-							<div className='card blue-grey darken-1'>
+							<div className='card yellow darken-1'>
 								<div key={user.id}>
 									<div>
 										{user.name}
@@ -67,4 +53,10 @@ class Users extends Component{
 	}
 }
 
-export default Users;
+const mapStateToProps = (state, ownProps) => {
+	return {
+		users: state.users
+	}
+}
+
+export default connect(mapStateToProps)(Users);
